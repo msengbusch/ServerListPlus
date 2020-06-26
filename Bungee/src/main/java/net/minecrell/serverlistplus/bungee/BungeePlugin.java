@@ -28,11 +28,15 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheBuilderSpec;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import de.themoep.minedown.MineDown;
+import de.themoep.minedown.Util;
 import net.md_5.bungee.api.AbstractReconnectHandler;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.Favicon;
 import net.md_5.bungee.api.ServerPing;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -44,6 +48,7 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.protocol.ProtocolConstants;
 import net.minecrell.mcstats.BungeeStatsLite;
 import net.minecrell.serverlistplus.bungee.integration.BungeeBanBanProvider;
 import net.minecrell.serverlistplus.core.ServerListPlusCore;
@@ -69,6 +74,7 @@ import net.minecrell.serverlistplus.core.util.Randoms;
 import java.awt.image.BufferedImage;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -210,7 +216,15 @@ public class BungeePlugin extends BungeePluginBase implements ServerListPlusPlug
 
             // Description
             String message = response.getDescription();
-            if (message != null) ping.setDescription(message);
+            if (message != null) {
+                BaseComponent[] components = MineDown.parse(message);
+                if (event.getConnection().getVersion() < ProtocolConstants.MINECRAFT_1_16) {
+                    components = Util.rgbColorsToLegacy(components);
+                }
+                TextComponent component = new TextComponent();
+                component.setExtra(Arrays.asList(components));
+                ping.setDescriptionComponent(component);
+            }
 
             if (version != null) {
                 // Version name
