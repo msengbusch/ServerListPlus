@@ -92,7 +92,6 @@ subprojects {
 }
 
 repositories {
-    mavenLocal()
     maven("https://jitpack.io/")
 }
 
@@ -103,7 +102,7 @@ dependencies {
     compile("org.ocpsoft.prettytime:prettytime:4.0.1.Final")
 
     compileOnly("org.slf4j:slf4j-api:1.7.25")
-    compileOnly("me.leoko.advancedban:AdvancedBan:2.1.6-SNAPSHOT") { isTransitive = false }
+    compileOnly("com.github.DevLeoko:AdvancedBan:v2.1.9") { isTransitive = false }
 
     testCompile("junit:junit:4.12")
     testCompile("org.mockito:mockito-core:2.20.0")
