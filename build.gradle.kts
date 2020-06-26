@@ -36,6 +36,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        maven("https://repo.minebench.de/")
     }
 
     dependencies {
@@ -85,9 +86,11 @@ subprojects {
         dependencies {
             include(project(rootProject.path))
             include(dependency("org.ocpsoft.prettytime:prettytime"))
+            include(dependency("de.themoep:minedown"))
         }
 
         relocate("org.ocpsoft.prettytime", "net.minecrell.serverlistplus.core.lib.prettytime")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
     }
 }
 
@@ -100,6 +103,7 @@ dependencies {
     compile("org.yaml:snakeyaml:1.19")
     compile("com.google.code.gson:gson:2.8.0")
     compile("org.ocpsoft.prettytime:prettytime:4.0.1.Final")
+    compile("de.themoep:minedown:1.6.1-SNAPSHOT")
 
     compileOnly("org.slf4j:slf4j-api:1.7.25")
     compileOnly("com.github.DevLeoko:AdvancedBan:v2.1.9") { isTransitive = false }

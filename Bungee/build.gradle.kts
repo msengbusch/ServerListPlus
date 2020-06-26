@@ -25,7 +25,6 @@ plugins {
 repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://repo.minecrell.net/releases/")
-    maven("https://repo.minebench.de/")
     maven("https://jitpack.io/")
 }
 
@@ -35,7 +34,6 @@ dependencies {
     compileOnly("com.github.lucavinci:bungeeban:v2.7.0") { isTransitive = false }
 
     compile("net.minecrell.mcstats:statslite-bungee:0.2.3")
-    compile("de.themoep:minedown:1.6.1-SNAPSHOT")
 }
 
 bungee {
@@ -49,10 +47,8 @@ tasks {
     getByName<ShadowJar>("shadowJar") {
         dependencies {
             include(dependency("net.minecrell.mcstats:statslite-bungee"))
-            include(dependency("de.themoep:minedown"))
         }
 
         relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
     }
 }

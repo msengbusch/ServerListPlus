@@ -23,10 +23,16 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.comphenix.protocol.wrappers.WrappedGameProfile;
 import com.comphenix.protocol.wrappers.WrappedServerPing;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import de.themoep.minedown.MineDown;
+import de.themoep.minedown.Util;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.chat.ComponentSerializer;
 import net.minecrell.serverlistplus.bukkit.BukkitPlugin;
 import net.minecrell.serverlistplus.core.status.ResponseFetcher;
 import net.minecrell.serverlistplus.core.status.StatusManager;
@@ -35,6 +41,7 @@ import net.minecrell.serverlistplus.core.status.StatusResponse;
 import net.minecrell.serverlistplus.core.util.Helper;
 
 import java.net.InetSocketAddress;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class ProtocolLibHandler extends StatusHandler {
@@ -99,7 +106,15 @@ public class ProtocolLibHandler extends StatusHandler {
             // Description is modified in BukkitEventHandler, but we modify it here again,
             // because the BukkitEventHandler has no access to information like virtual hosts.
             String message = response.getDescription();
-            if (message != null) ping.setMotD(message);
+            if (message != null) {
+                BaseComponent[] components = MineDown.parse(message);
+                if (ping.getVersionProtocol() < 735) {
+                    components = Util.rgbColorsToLegacy(components);
+                }
+                TextComponent component = new TextComponent();
+                component.setExtra(Arrays.asList(components));
+                ping.setMotD(WrappedChatComponent.fromJson(ComponentSerializer.toString(component)));
+            }
 
             // Version name
             message = response.getVersion();
