@@ -111,9 +111,7 @@ public class ProtocolLibHandler extends StatusHandler {
                 if (ping.getVersionProtocol() < 735) {
                     components = Util.rgbColorsToLegacy(components);
                 }
-                TextComponent component = new TextComponent();
-                component.setExtra(Arrays.asList(components));
-                ping.setMotD(WrappedChatComponent.fromJson(ComponentSerializer.toString(component)));
+                ping.setMotD(WrappedChatComponent.fromJson(ComponentSerializer.toString(new TextComponent(components))));
             }
 
             // Version name

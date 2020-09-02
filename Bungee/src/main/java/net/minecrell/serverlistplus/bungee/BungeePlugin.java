@@ -221,9 +221,7 @@ public class BungeePlugin extends BungeePluginBase implements ServerListPlusPlug
                 if (event.getConnection().getVersion() < ProtocolConstants.MINECRAFT_1_16) {
                     components = Util.rgbColorsToLegacy(components);
                 }
-                TextComponent component = new TextComponent();
-                component.setExtra(Arrays.asList(components));
-                ping.setDescriptionComponent(component);
+                ping.setDescriptionComponent(new TextComponent(components));
             }
 
             if (version != null) {
