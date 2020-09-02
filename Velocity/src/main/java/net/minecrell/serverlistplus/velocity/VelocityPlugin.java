@@ -33,6 +33,7 @@ import com.velocitypowered.api.event.connection.LoginEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyPingEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
+import com.velocitypowered.api.network.ProtocolVersion;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.InboundConnection;
@@ -41,7 +42,9 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import com.velocitypowered.api.proxy.server.ServerPing;
 import com.velocitypowered.api.util.Favicon;
-import net.kyori.text.serializer.legacy.LegacyComponentSerializer;
+import de.themoep.minedown.adventure.MineDown;
+import de.themoep.minedown.adventure.Util;
+import net.kyori.adventure.text.Component;
 import net.minecrell.serverlistplus.core.ServerListPlusCore;
 import net.minecrell.serverlistplus.core.ServerListPlusException;
 import net.minecrell.serverlistplus.core.config.PluginConf;
@@ -213,7 +216,13 @@ public class VelocityPlugin implements ServerListPlusPlugin {
 
             // Description
             String message = response.getDescription();
-            if (message != null) builder.description(LegacyComponentSerializer.INSTANCE.deserialize(message));
+            if (message != null) {
+                Component component = MineDown.parse(message);
+                if (event.getConnection().getProtocolVersion().getProtocol() < ProtocolVersion.MINECRAFT_1_16.getProtocol()) {
+                    component = Util.rgbColorsToLegacy(component);
+                }
+                builder.description(component);
+            }
 
             if (version != null) {
                 // Version name

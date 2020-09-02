@@ -29,6 +29,7 @@ repositories {
     maven("http://repo.dmulloy2.net/nexus/repository/releases/")
     maven("http://repo.dmulloy2.net/nexus/repository/snapshots/")
     maven("https://ci.frostcast.net/plugin/repository/everything/")
+    maven("https://repo.minebench.de/")
     maven("https://jitpack.io/")
 }
 
@@ -42,6 +43,7 @@ dependencies {
     compileOnly("com.github.netherfoam:MaxBans:156239e1f1") { isTransitive = false }
 
     compile("org.mcstats.bukkit:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
+    compile("de.themoep:minedown:1.6.1-SNAPSHOT")
 }
 
 bukkit {
@@ -70,9 +72,11 @@ tasks {
     withType<ShadowJar> {
         dependencies {
             include(dependency("org.mcstats.bukkit:metrics-lite"))
+            include(dependency("de.themoep:minedown"))
         }
 
         relocate("org.mcstats", "net.minecrell.serverlistplus.bukkit.mcstats")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
     }
 
     // Remapped artifacts for compatibility with 1.7.x and 1.8

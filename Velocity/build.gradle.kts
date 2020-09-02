@@ -16,15 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 repositories {
     maven("https://repo.velocitypowered.com/snapshots/")
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:1.0.0-SNAPSHOT")
-    annotationProcessor("com.velocitypowered:velocity-api:1.0.0-SNAPSHOT")
+    compileOnly("com.velocitypowered:velocity-api:1.1.0-SNAPSHOT")
+    compile("de.themoep:minedown-adventure:1.6.1-SNAPSHOT")
+    annotationProcessor("com.velocitypowered:velocity-api:1.1.0-SNAPSHOT")
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks {
+    getByName<ShadowJar>("shadowJar") {
+        dependencies {
+            include(dependency("de.themoep:minedown-adventure"))
+        }
+
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
+    }
 }
