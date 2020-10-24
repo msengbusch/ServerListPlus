@@ -107,7 +107,7 @@ public class ProtocolLibHandler extends StatusHandler {
             // because the BukkitEventHandler has no access to information like virtual hosts.
             String message = response.getDescription();
             if (message != null) {
-                BaseComponent[] components = MineDown.parse(message);
+                BaseComponent[] components = new MineDown(message).urlDetection(false).toComponent();;
                 if (ping.getVersionProtocol() < 735) {
                     components = Util.rgbColorsToLegacy(components);
                 }
