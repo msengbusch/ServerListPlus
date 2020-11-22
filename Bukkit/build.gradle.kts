@@ -76,7 +76,7 @@ tasks {
         }
 
         relocate("org.mcstats", "net.minecrell.serverlistplus.bukkit.mcstats")
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.bukkit.minedown")
     }
 
     // Remapped artifacts for compatibility with 1.7.x and 1.8

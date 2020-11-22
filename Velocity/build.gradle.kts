@@ -38,6 +38,6 @@ tasks {
             include(dependency("de.themoep:minedown-adventure"))
         }
 
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.velocity.minedown")
     }
 }

@@ -53,6 +53,6 @@ tasks {
         }
 
         relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.minedown")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.bungee.minedown")
     }
 }
