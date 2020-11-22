@@ -217,7 +217,7 @@ public class BungeePlugin extends BungeePluginBase implements ServerListPlusPlug
             // Description
             String message = response.getDescription();
             if (message != null) {
-                BaseComponent[] components = new MineDown(message).urlDetection(false).toComponent();
+                BaseComponent[] components = new MineDown(message.replace('§', '&')).urlDetection(false).toComponent();
                 if (event.getConnection().getVersion() < ProtocolConstants.MINECRAFT_1_16) {
                     components = Util.rgbColorsToLegacy(components);
                 }

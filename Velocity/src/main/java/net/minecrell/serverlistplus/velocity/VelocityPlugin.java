@@ -217,7 +217,7 @@ public class VelocityPlugin implements ServerListPlusPlugin {
             // Description
             String message = response.getDescription();
             if (message != null) {
-                Component component = new MineDown(message).urlDetection(false).toComponent();
+                Component component = new MineDown(message.replace('§', '&')).urlDetection(false).toComponent();
                 if (event.getConnection().getProtocolVersion().getProtocol() < ProtocolVersion.MINECRAFT_1_16.getProtocol()) {
                     component = Util.rgbColorsToLegacy(component);
                 }
