@@ -35,7 +35,7 @@ dependencies {
     compileOnly("com.github.lucavinci:bungeeban:v2.7.0") { isTransitive = false }
 
     compile("net.minecrell.mcstats:statslite-bungee:0.2.3")
-    compile("de.themoep:minedown:1.6.2-SNAPSHOT")
+    compile("de.themoep:minedown:1.7.0-SNAPSHOT")
 }
 
 bungee {

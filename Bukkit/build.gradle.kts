@@ -43,7 +43,7 @@ dependencies {
     compileOnly("com.github.netherfoam:MaxBans:156239e1f1") { isTransitive = false }
 
     compile("org.mcstats.bukkit:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
-    compile("de.themoep:minedown:1.6.2-SNAPSHOT")
+    compile("de.themoep:minedown:1.7.0-SNAPSHOT")
 }
 
 bukkit {
