@@ -20,5 +20,3 @@ val name: String by settings
 rootProject.name = name
 
 include("Bukkit", "Bungee", "Sponge", "Velocity", "Server")
-
-enableFeaturePreview("STABLE_PUBLISHING")
