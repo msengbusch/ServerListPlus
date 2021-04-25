@@ -22,7 +22,7 @@ plugins {
     java
     `maven-publish`
     id("com.github.johnrengelman.shadow") version "2.0.4" apply false
-    id("net.minecrell.licenser") version "0.4"
+    id("org.cadixdev.licenser") version "0.5.1"
 }
 
 defaultTasks("clean", "build")
@@ -49,7 +49,7 @@ allprojects {
         options.isDeprecation = true
     }
 
-    plugins.apply("net.minecrell.licenser")
+    plugins.apply("org.cadixdev.licenser")
 
     license {
         header = rootProject.file("src/main/resources/LICENSE")
@@ -57,7 +57,7 @@ allprojects {
         include("**/*.kts")
 
         tasks {
-            "gradle" {
+            create("gradle") {
                 files = project.files("build.gradle.kts", "settings.gradle.kts")
             }
         }
@@ -107,12 +107,15 @@ dependencies {
 
     testCompile("junit:junit:4.12")
     testCompile("org.mockito:mockito-core:2.20.0")
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 tasks {
     // Copy project properties, loaded at runtime for version information
-    getByName<AbstractCopyTask>("processResources") {
-        expand(properties) // Replace variables in HEADER file
+    getByName<Copy>("processResources") {
+        expand(project.properties) // Replace variables in HEADER file
 
         from("gradle.properties") {
             into("net/minecrell/serverlistplus/core")
@@ -139,7 +142,7 @@ tasks {
 
         classifier = "sources"
         allprojects {
-            from(java.sourceSets["main"].allSource)
+            from(sourceSets["main"].allSource)
         }
     }
 }

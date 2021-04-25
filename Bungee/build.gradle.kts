@@ -20,6 +20,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("net.minecrell.plugin-yml.bungee") version "0.3.0"
+    id("java")
 }
 
 repositories {
@@ -36,6 +37,9 @@ dependencies {
 
     compile("net.minecrell.mcstats:statslite-bungee:0.2.3")
     compile("de.themoep:minedown:1.7.0-SNAPSHOT")
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 bungee {

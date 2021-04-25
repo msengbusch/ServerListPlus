@@ -18,7 +18,13 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
+plugins {
+    id("java")
+}
+
 repositories {
+    mavenCentral()
+    maven("https://repo.minebench.de/")
     maven("https://repo.velocitypowered.com/snapshots/")
 }
 
@@ -26,6 +32,9 @@ dependencies {
     compileOnly("com.velocitypowered:velocity-api:1.1.3-SNAPSHOT")
     compile("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
     annotationProcessor("com.velocitypowered:velocity-api:1.1.3-SNAPSHOT")
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 java {

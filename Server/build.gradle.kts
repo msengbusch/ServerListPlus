@@ -18,6 +18,14 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
+plugins {
+    id("java")
+}
+
+repositories {
+    mavenCentral()
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
@@ -28,6 +36,9 @@ dependencies {
     compile("com.google.guava:guava:25.1-jre")
     compile("org.yaml:snakeyaml:1.21")
     compile("com.google.code.gson:gson:2.8.5")
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 tasks {

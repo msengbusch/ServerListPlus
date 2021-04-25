@@ -20,6 +20,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
+    id("java")
 }
 
 repositories {
@@ -43,6 +44,9 @@ dependencies {
 
     compile("org.mcstats.bukkit:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
     compile("de.themoep:minedown:1.7.0-SNAPSHOT")
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 bukkit {
@@ -53,7 +57,7 @@ bukkit {
     softDepend = listOf("ProtocolLib", "AdvancedBan", "BanManager", "MaxBans")
 
     commands {
-        "serverlistplus" {
+        create("serverlistplus") {
             description = "Configure ServerListPlus"
             // I have no idea why I added so many weird aliases back then... "slp" is the only relevant one
             aliases = listOf("slp", "serverlist+", "serverlist", "sl+", "s++", "serverping+", "serverping", "spp", "slus")
@@ -61,7 +65,7 @@ bukkit {
     }
 
     permissions {
-        "serverlistplus.admin" {
+        create("serverlistplus.admin") {
             description = "Allows you to access the ServerListPlus administration commands"
         }
     }
@@ -83,7 +87,7 @@ tasks {
         create<ShadowJar>("shadow$name") {
             classifier = "${project.name}-$name"
             configurations = listOf(project.configurations["runtimeClasspath"])
-            from(java.sourceSets["main"].output)
+            from(sourceSets["main"].output)
             configure()
         }
     }
