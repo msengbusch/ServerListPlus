@@ -27,8 +27,8 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://repo.minecrell.net/snapshots/")
     maven("https://destroystokyo.com/repo/repository/maven-snapshots/")
-    maven("http://repo.dmulloy2.net/nexus/repository/releases/")
-    maven("http://repo.dmulloy2.net/nexus/repository/snapshots/")
+    maven("https://repo.dmulloy2.net/nexus/repository/releases/")
+    maven("https://repo.dmulloy2.net/nexus/repository/snapshots/")
     maven("https://ci.frostcast.net/plugin/repository/everything/")
     maven("https://repo.minebench.de/")
     maven("https://jitpack.io/")
@@ -42,8 +42,8 @@ dependencies {
     compileOnly("com.github.seancfoley:ipaddress:5.2.1") /* For BanManager */
     compileOnly("com.github.netherfoam:MaxBans:156239e1f1") { isTransitive = false }
 
-    compile("org.mcstats.bukkit:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
-    compile("de.themoep:minedown:1.7.0-SNAPSHOT")
+    implementation("org.mcstats.bukkit:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
+    implementation("de.themoep:minedown:1.7.0-SNAPSHOT")
 
     compileOnly("org.projectlombok:lombok:1.18.20")
     annotationProcessor("org.projectlombok:lombok:1.18.20")

@@ -19,7 +19,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    id("org.spongepowered.plugin") version "0.9.0"
+    id("org.spongepowered.gradle.plugin") version "1.0.1"
 }
 
 repositories {
@@ -30,12 +30,24 @@ dependencies {
     compileOnly("org.spongepowered:spongeapi:7.0.0")
     annotationProcessor("org.spongepowered:spongeapi:7.0.0")
 
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
+
     compileOnly("net.minecrell:statusprotocol:0.3")
-    compile("net.minecrell.mcstats:statslite-sponge:0.2.3")
+    implementation("net.minecrell.mcstats:statslite-sponge:0.2.3")
 }
 
 sponge {
-    plugin.id = "serverlistplus"
+    plugin("serverlistplus") {
+        description("A flexible Minecraft plugin to customize the appearance of your server in the server list")
+        mainClass("net.minecrell.serverlistplus.sponge.SpongePlugin")
+        loader(org.spongepowered.gradle.plugin.config.PluginLoaders.JAVA_PLAIN)
+        links {
+            homepage("https://ci.minebench.de/job/ServerListPlus/")
+            source("https://github.com/Minebench/ServerListPlus")
+            issues("https://github.com/Minebench/ServerListPlus/issues")
+        }
+    }
 }
 
 tasks {

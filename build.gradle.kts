@@ -70,7 +70,7 @@ subprojects {
     }
 
     dependencies {
-        compile(rootProject)
+        implementation(rootProject)
     }
 
     plugins.apply("com.github.johnrengelman.shadow")
@@ -78,7 +78,7 @@ subprojects {
     tasks.withType<ShadowJar> {
         artifacts.add("archives", this)
 
-        baseName = rootProject.name
+        archiveBaseName.set(rootProject.name)
         classifier = project.name
 
         exclude("META-INF/")
@@ -97,16 +97,16 @@ repositories {
 }
 
 dependencies {
-    compile("com.google.guava:guava:21.0")
-    compile("org.yaml:snakeyaml:1.19")
-    compile("com.google.code.gson:gson:2.8.0")
-    compile("org.ocpsoft.prettytime:prettytime:4.0.1.Final")
+    implementation("com.google.guava:guava:21.0")
+    implementation("org.yaml:snakeyaml:1.19")
+    implementation("com.google.code.gson:gson:2.8.0")
+    implementation("org.ocpsoft.prettytime:prettytime:4.0.1.Final")
 
     compileOnly("org.slf4j:slf4j-api:1.7.25")
     compileOnly("com.github.DevLeoko:AdvancedBan:v2.2.1") { isTransitive = false }
 
-    testCompile("junit:junit:4.12")
-    testCompile("org.mockito:mockito-core:2.20.0")
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.mockito:mockito-core:2.20.0")
 
     compileOnly("org.projectlombok:lombok:1.18.20")
     annotationProcessor("org.projectlombok:lombok:1.18.20")

@@ -30,7 +30,10 @@ dependencies {
         exclude("org.mcstats.standalone", "metrics")
     }
 
-    compile("org.mcstats.canary:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
+    implementation("org.mcstats.canary:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 tasks {

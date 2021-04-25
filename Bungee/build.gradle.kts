@@ -35,8 +35,8 @@ dependencies {
 
     compileOnly("com.github.lucavinci:bungeeban:v2.7.0") { isTransitive = false }
 
-    compile("net.minecrell.mcstats:statslite-bungee:0.2.3")
-    compile("de.themoep:minedown:1.7.0-SNAPSHOT")
+    implementation("net.minecrell.mcstats:statslite-bungee:0.2.3")
+    implementation("de.themoep:minedown:1.7.0-SNAPSHOT")
 
     compileOnly("org.projectlombok:lombok:1.18.20")
     annotationProcessor("org.projectlombok:lombok:1.18.20")

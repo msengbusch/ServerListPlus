@@ -30,7 +30,7 @@ repositories {
 
 dependencies {
     compileOnly("com.velocitypowered:velocity-api:1.1.3-SNAPSHOT")
-    compile("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
+    implementation("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
     annotationProcessor("com.velocitypowered:velocity-api:1.1.3-SNAPSHOT")
 
     compileOnly("org.projectlombok:lombok:1.18.20")
