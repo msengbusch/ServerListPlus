@@ -31,15 +31,15 @@ repositories {
 }
 
 dependencies {
-    compileOnly("net.md-5:bungeecord-api:1.16-R0.4-SNAPSHOT")
+    compileOnly(libs.bungeecord)
 
-    compileOnly("com.github.lucavinci:bungeeban:v2.7.0") { isTransitive = false }
+    compileOnly(libs.bungeeban) { isTransitive = false }
 
-    implementation("net.minecrell.mcstats:statslite-bungee:0.2.3")
-    implementation("de.themoep:minedown:1.7.0-SNAPSHOT")
+    implementation(libs.statslite.bungee)
+    implementation(libs.minedown.core)
 
-    compileOnly("org.projectlombok:lombok:1.18.20")
-    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 bungee {
@@ -52,8 +52,8 @@ bungee {
 tasks {
     getByName<ShadowJar>("shadowJar") {
         dependencies {
-            include(dependency("net.minecrell.mcstats:statslite-bungee"))
-            include(dependency("de.themoep:minedown"))
+            include(dependency(libs.statslite.bungee.get()))
+            include(dependency(libs.minedown.core.get()))
         }
 
         relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")

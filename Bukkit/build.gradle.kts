@@ -35,18 +35,18 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT")
-    compileOnly("com.comphenix.protocol:ProtocolLib-API:4.4.0") { isTransitive = false }
+    compileOnly(libs.paper)
+    compileOnly(libs.protocollib) { isTransitive = false }
 
-    compileOnly("me.confuser.banmanager:BanManagerCommon:7.2.2") { isTransitive = false }
-    compileOnly("com.github.seancfoley:ipaddress:5.2.1") /* For BanManager */
-    compileOnly("com.github.netherfoam:MaxBans:156239e1f1") { isTransitive = false }
+    compileOnly(libs.banmanager) { isTransitive = false }
+    compileOnly(libs.ipaddress) /* For BanManager */
+    compileOnly(libs.maxbans) { isTransitive = false }
 
-    implementation("org.mcstats.bukkit:metrics-lite:R8-SNAPSHOT") { isTransitive = false }
-    implementation("de.themoep:minedown:1.7.0-SNAPSHOT")
+    implementation(libs.metricslite) { isTransitive = false }
+    implementation(libs.minedown.core)
 
-    compileOnly("org.projectlombok:lombok:1.18.20")
-    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 bukkit {
@@ -74,8 +74,8 @@ bukkit {
 tasks {
     withType<ShadowJar> {
         dependencies {
-            include(dependency("org.mcstats.bukkit:metrics-lite"))
-            include(dependency("de.themoep:minedown"))
+            include(dependency(libs.metricslite.get()))
+            include(dependency(libs.minedown.core.get()))
         }
 
         relocate("org.mcstats", "net.minecrell.serverlistplus.bukkit.mcstats")

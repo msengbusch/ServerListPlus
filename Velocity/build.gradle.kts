@@ -29,12 +29,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:1.1.3-SNAPSHOT")
-    implementation("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
-    annotationProcessor("com.velocitypowered:velocity-api:1.1.3-SNAPSHOT")
+    compileOnly(libs.velocity)
+    implementation(libs.minedown.adventure)
+    annotationProcessor(libs.velocity)
 
-    compileOnly("org.projectlombok:lombok:1.18.20")
-    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 java {
@@ -44,7 +44,7 @@ java {
 tasks {
     getByName<ShadowJar>("shadowJar") {
         dependencies {
-            include(dependency("de.themoep:minedown-adventure"))
+            include(dependency(libs.minedown.adventure.get()))
         }
 
         relocate("de.themoep.minedown", "net.minecrell.serverlistplus.velocity.minedown")

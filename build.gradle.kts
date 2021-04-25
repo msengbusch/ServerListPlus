@@ -21,11 +21,17 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "2.0.4" apply false
+    id("com.github.johnrengelman.shadow") version "6.1.0" apply false
     id("org.cadixdev.licenser") version "0.5.1"
+    id("com.github.ben-manes.versions") version "0.38.0"
 }
 
 defaultTasks("clean", "build")
+
+dependencies {
+    implementation(libs.lombok)
+    annotationProcessor(libs.lombok)
+}
 
 allprojects {
     plugins.apply("java")
@@ -37,11 +43,6 @@ allprojects {
     repositories {
         mavenCentral()
         maven("https://repo.minebench.de/")
-    }
-
-    dependencies {
-        compileOnly("org.projectlombok:lombok:1.16.20")
-        annotationProcessor("org.projectlombok:lombok:1.16.20")
     }
 
     tasks.withType<JavaCompile> {
@@ -97,19 +98,19 @@ repositories {
 }
 
 dependencies {
-    implementation("com.google.guava:guava:21.0")
-    implementation("org.yaml:snakeyaml:1.19")
-    implementation("com.google.code.gson:gson:2.8.0")
-    implementation("org.ocpsoft.prettytime:prettytime:4.0.1.Final")
+    implementation(libs.guava)
+    implementation(libs.snakeyaml)
+    implementation(libs.gson)
+    implementation(libs.prettytime)
 
-    compileOnly("org.slf4j:slf4j-api:1.7.25")
-    compileOnly("com.github.DevLeoko:AdvancedBan:v2.2.1") { isTransitive = false }
+    compileOnly(libs.slf4j)
+    compileOnly(libs.advancedban) { isTransitive = false }
 
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:2.20.0")
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito)
 
-    compileOnly("org.projectlombok:lombok:1.18.20")
-    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 tasks {

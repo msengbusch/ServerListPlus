@@ -1,0 +1,72 @@
+[versions]
+#Libs
+gson = "2.8.6"
+guava = "30.1.1-jre"
+ipaddress = "5.3.3"
+lombok = "1.18.20"
+netty = "4.1.27.Final"
+prettytime = "4.0.1.Final"
+slf4j = "1.7.25"
+snakeyaml = "1.21"
+
+#Minecraft-Libs
+metrics-lite = "R8-SNAPSHOT"
+minedown = "1.7.0-SNAPSHOT"
+statusprotocol = "0.3"
+statslite = "0.2.3"
+
+#Platforms
+bungeecord = "1.16-R0.4-SNAPSHOT"
+paper = "1.16.5-R0.1-SNAPSHOT"
+sponge = "7.3.0"
+velocity = "1.1.5"
+
+#Plugins
+advancedban = "v2.2.1"
+banmanager = "7.2.2"
+bungeeban = "v2.7.0"
+maxbans = "156239e1f1"
+protocollib = "4.4.0"
+
+#Testing
+junit = "4.13.2"
+mockito = "3.9.0"
+
+[libraries]
+#Libs
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+ipaddress = { module = "com.github.seancfoley:ipaddress", version.ref = "ipaddress" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+netty = { module = "io.netty:netty-all", version.ref = "netty" }
+prettytime = { module = "org.ocpsoft.prettytime:prettytime", version.ref = "prettytime" }
+slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
+
+#Minecraft-Libs
+metricslite = { module = "org.mcstats.bukkit:metrics-lite", version.ref = "metrics-lite" }
+minedown-core = { module = "de.themoep:minedown", version.ref = "minedown" }
+minedown-adventure = { module = "de.themoep:minedown-adventure", version.ref = "minedown" }
+statusprotocol = { module = "net.minecrell:statusprotocol", version.ref = "statusprotocol" }
+statslite-bungee = { module = "net.minecrell.mcstats:statslite-bungee", version.ref = "statslite" }
+statslite-sponge = { module = "net.minecrell.mcstats:statslite-sponge", version.ref = "statslite" }
+
+#Platforms
+bungeecord = { module = "net.md-5:bungeecord-api", version.ref = "bungeecord" }
+paper = { module = "com.destroystokyo.paper:paper-api", version.ref = "paper"}
+sponge = { module = "org.spongepowered:spongeapi", version.ref = "sponge" }
+velocity = { module = "com.velocitypowered:velocity-api", version.ref = "velocity" }
+
+#Plugins
+advancedban = { module = "com.github.DevLeoko:AdvancedBan", version.ref = "advancedban" }
+banmanager = { module = "me.confuser.banmanager:BanManagerCommon", version.ref = "banmanager" }
+bungeeban = { module = "com.github.lucavinci:bungeeban", version.ref = "bungeeban" }
+maxbans = { module = "com.github.netherfoam:MaxBans", version.ref = "maxbans" }
+protocollib = { module = "com.comphenix.protocol:ProtocolLib-API", version.ref = "protocollib" }
+
+#Testing
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+
+[bundles]
+#No bundles needed

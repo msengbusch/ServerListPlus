@@ -24,10 +24,10 @@ import org.yaml.snakeyaml.nodes.Tag;
 
 public class OutdatedConfigurationRepresenter extends ConfigurationRepresenter {
     @Override
-    protected Node representScalar(Tag tag, String value, Character style) {
+    protected Node representScalar(Tag tag, String value, DumperOptions.ScalarStyle style) {
         if (style == null && value != null && value.indexOf('\n') > -1)
             // Use literal style to generate nice output for multiple lines on CraftBukkit
-            style = DumperOptions.ScalarStyle.LITERAL.getChar();
+            style = DumperOptions.ScalarStyle.LITERAL;
         return super.representScalar(tag, value, style);
     }
 }
