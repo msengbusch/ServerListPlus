@@ -20,7 +20,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
-    id("java")
 }
 
 repositories {
@@ -30,22 +29,20 @@ repositories {
     maven("https://repo.dmulloy2.net/nexus/repository/releases/")
     maven("https://repo.dmulloy2.net/nexus/repository/snapshots/")
     maven("https://ci.frostcast.net/plugin/repository/everything/")
-    maven("https://repo.minebench.de/")
     maven("https://jitpack.io/")
 }
 
 dependencies {
     compileOnly(libs.paper)
     compileOnly(libs.protocollib) { isTransitive = false }
-
     compileOnly(libs.banmanager) { isTransitive = false }
     compileOnly(libs.ipaddress) /* For BanManager */
     compileOnly(libs.maxbans) { isTransitive = false }
+    compileOnly(libs.lombok)
 
     implementation(libs.metricslite) { isTransitive = false }
     implementation(libs.minedown.core)
 
-    compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
 }
 
@@ -73,13 +70,13 @@ bukkit {
 
 tasks {
     withType<ShadowJar> {
+        relocate("org.mcstats", "net.minecrell.serverlistplus.bukkit.mcstats")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.bukkit.minedown")
+
         dependencies {
             include(dependency(libs.metricslite.get()))
             include(dependency(libs.minedown.core.get()))
         }
-
-        relocate("org.mcstats", "net.minecrell.serverlistplus.bukkit.mcstats")
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.bukkit.minedown")
     }
 
     // Remapped artifacts for compatibility with 1.7.x and 1.8
@@ -91,10 +88,12 @@ tasks {
             configure()
         }
     }
+
     createShadowTask("1.7.X") {
         relocate("com.google.common", "net.minecraft.util.com.google.common")
         relocate("com.google.gson", "net.minecraft.util.com.google.gson")
     }
+
     createShadowTask("1.8") {
         relocate("com.google.gson", "org.bukkit.craftbukkit.libs.com.google.gson")
     }

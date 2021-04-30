@@ -20,25 +20,22 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("net.minecrell.plugin-yml.bungee") version "0.3.0"
-    id("java")
 }
 
 repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://repo.minecrell.net/releases/")
-    maven("https://repo.minebench.de/")
     maven("https://jitpack.io/")
 }
 
 dependencies {
-    compileOnly(libs.bungeecord)
-
-    compileOnly(libs.bungeeban) { isTransitive = false }
-
     implementation(libs.statslite.bungee)
     implementation(libs.minedown.core)
 
+    compileOnly(libs.bungeecord)
+    compileOnly(libs.bungeeban) { isTransitive = false }
     compileOnly(libs.lombok)
+
     annotationProcessor(libs.lombok)
 }
 
@@ -51,12 +48,12 @@ bungee {
 
 tasks {
     getByName<ShadowJar>("shadowJar") {
+        relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.bungee.minedown")
+
         dependencies {
             include(dependency(libs.statslite.bungee.get()))
             include(dependency(libs.minedown.core.get()))
         }
-
-        relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.bungee.minedown")
     }
 }

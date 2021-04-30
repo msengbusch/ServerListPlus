@@ -18,26 +18,14 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-plugins {
-    id("java")
-}
-
-repositories {
-    mavenCentral()
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}
-
 dependencies {
     implementation(libs.netty)
-
     implementation(libs.guava)
     implementation(libs.snakeyaml)
     implementation(libs.gson)
 
     compileOnly(libs.lombok)
+
     annotationProcessor(libs.lombok)
 }
 

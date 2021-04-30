@@ -18,35 +18,27 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-plugins {
-    id("java")
-}
-
 repositories {
-    mavenCentral()
     maven("https://repo.minebench.de/")
     maven("https://repo.velocitypowered.com/snapshots/")
 }
 
 dependencies {
-    compileOnly(libs.velocity)
     implementation(libs.minedown.adventure)
-    annotationProcessor(libs.velocity)
 
+    compileOnly(libs.velocity)
     compileOnly(libs.lombok)
-    annotationProcessor(libs.lombok)
-}
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    annotationProcessor(libs.velocity)
+    annotationProcessor(libs.lombok)
 }
 
 tasks {
     getByName<ShadowJar>("shadowJar") {
+        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.velocity.minedown")
+
         dependencies {
             include(dependency(libs.minedown.adventure.get()))
         }
-
-        relocate("de.themoep.minedown", "net.minecrell.serverlistplus.velocity.minedown")
     }
 }

@@ -27,14 +27,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly(libs.sponge)
-    annotationProcessor(libs.sponge)
-
-    compileOnly(libs.lombok)
-    annotationProcessor(libs.lombok)
-
-    compileOnly(libs.statusprotocol)
     implementation(libs.statslite.sponge)
+
+    compileOnly(libs.sponge)
+    compileOnly(libs.lombok)
+    compileOnly(libs.statusprotocol)
+
+    annotationProcessor(libs.sponge)
+    annotationProcessor(libs.lombok)
 }
 
 sponge {
@@ -52,10 +52,10 @@ sponge {
 
 tasks {
     getByName<ShadowJar>("shadowJar") {
+        relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")
+
         dependencies {
             include(dependency(libs.statslite.sponge.get()))
         }
-
-        relocate("net.minecrell.mcstats", "net.minecrell.serverlistplus.mcstats")
     }
 }

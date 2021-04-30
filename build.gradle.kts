@@ -21,36 +21,26 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     java
     `maven-publish`
+
     id("com.github.johnrengelman.shadow") version "6.1.0" apply false
     id("org.cadixdev.licenser") version "0.5.1"
     id("com.github.ben-manes.versions") version "0.38.0"
 }
 
-defaultTasks("clean", "build")
-
-dependencies {
-    implementation(libs.lombok)
-    annotationProcessor(libs.lombok)
-}
-
 allprojects {
     plugins.apply("java")
-
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
+    plugins.apply("org.cadixdev.licenser")
 
     repositories {
         mavenCentral()
+
         maven("https://repo.minebench.de/")
     }
 
-    tasks.withType<JavaCompile> {
-        options.encoding = "UTF-8"
-        options.isDeprecation = true
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-
-    plugins.apply("org.cadixdev.licenser")
 
     license {
         header = rootProject.file("src/main/resources/LICENSE")
@@ -63,9 +53,16 @@ allprojects {
             }
         }
     }
+
+    tasks.withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        options.isDeprecation = true
+    }
 }
 
 subprojects {
+    plugins.apply("com.github.johnrengelman.shadow")
+
     base {
         archivesBaseName = "${rootProject.name}$archivesBaseName"
     }
@@ -73,8 +70,6 @@ subprojects {
     dependencies {
         implementation(rootProject)
     }
-
-    plugins.apply("com.github.johnrengelman.shadow")
 
     tasks.withType<ShadowJar> {
         artifacts.add("archives", this)
@@ -93,6 +88,8 @@ subprojects {
     }
 }
 
+defaultTasks("clean", "build")
+
 repositories {
     maven("https://jitpack.io/")
 }
@@ -103,13 +100,13 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.prettytime)
 
+    compileOnly(libs.lombok)
     compileOnly(libs.slf4j)
     compileOnly(libs.advancedban) { isTransitive = false }
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito)
 
-    compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
 }
 
